@@ -1,5 +1,4 @@
-// @ts-ignore
-import { IActivateModal, IModal } from '../store';
+import type { IActivateModal, IModal } from '../store';
 
 export const saveAfterUpdate = (state: IModal, modal: IActivateModal) => ({
   ...state,
