@@ -1,7 +1,11 @@
-import {userAgentsList} from '../config';
+import { userAgentsList } from '../config';
 // @ts-ignore
-import {IUserAgent} from '../store';
-import {getCustomUserAgents, removeCustomUserAgent, saveCustomUserAgents} from './custom-user-agents.helper';
+import { IUserAgent } from '../store';
+import {
+  getCustomUserAgents,
+  removeCustomUserAgent,
+  saveCustomUserAgents,
+} from './custom-user-agents.helper';
 
 export const getUserAgents = () => userAgentsList.concatFromLocalStorage();
 
@@ -23,5 +27,5 @@ declare global {
 
 Array.prototype.concatFromLocalStorage = function () {
   const customUserAgents = getCustomUserAgents();
-  return [...this, {ua: 'Custom', name: 'Custom'}, ...customUserAgents];
-}
+  return [...this, { ua: 'Custom', name: 'Custom' }, ...customUserAgents];
+};

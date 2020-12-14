@@ -1,8 +1,6 @@
-
-import {testProxies} from '../config';
-import {loadCities} from '../store';
-import {getCities, http} from './api-requests.service';
-
+import { testProxies } from '../config';
+import { loadCities } from '../store';
+import { getCities, http } from './api-requests.service';
 
 interface IProxyData {
   isAvailable: boolean;
@@ -12,9 +10,16 @@ interface IProxyData {
 }
 
 export const Cities = {
-  init: () => http(getCities, (proxies: IProxyData[]) => {
-    loadCities(proxies.filter(proxy => !proxy.isAvailable)
-      .map(proxy => ({id: proxy.host, text: `${proxy.country}, ${proxy.city}`}))
-      .concat(testProxies))
-  }),
+  init: () =>
+    http(getCities, (proxies: IProxyData[]) => {
+      loadCities(
+        proxies
+          .filter((proxy) => !proxy.isAvailable)
+          .map((proxy) => ({
+            id: proxy.host,
+            text: `${proxy.country}, ${proxy.city}`,
+          }))
+          .concat(testProxies)
+      );
+    }),
 };

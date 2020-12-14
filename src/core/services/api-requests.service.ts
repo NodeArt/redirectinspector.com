@@ -1,4 +1,4 @@
-import {mainUrl} from "../config";
+import { mainUrl } from '../config';
 
 interface IPostBody {
   url: string;
@@ -8,14 +8,14 @@ interface IPostBody {
 
 export const http = async (func, callback) => {
   const fetchData = await func();
-  return (!!fetchData.statusCode) ? [] : callback(fetchData);
+  return !!fetchData.statusCode ? [] : callback(fetchData);
 };
 
-export const getCities = async() => {
-  return await fetch(`${mainUrl}/status`).then(r => r.json());
+export const getCities = async () => {
+  return await fetch(`${mainUrl}/status`).then((r) => r.json());
 };
 
-export const getHistory = async(body: IPostBody) => {
+export const getHistory = async (body: IPostBody) => {
   const formData = new FormData();
   formData.append('city', body.city);
   formData.append('url', body.url);
@@ -24,8 +24,8 @@ export const getHistory = async(body: IPostBody) => {
   const postData = await fetch(`${mainUrl}/history`, {
     method: 'POST',
     body: JSON.stringify(body),
-    headers: {'Content-Type': 'application/json'},
-  }).then(r => r.json());
+    headers: { 'Content-Type': 'application/json' },
+  }).then((r) => r.json());
 
   return postData;
 };

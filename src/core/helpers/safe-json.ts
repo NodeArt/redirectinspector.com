@@ -32,8 +32,7 @@ export class SafeJSON {
     let result = input;
     try {
       result = callback();
-    } catch (e) {
-    }
+    } catch (e) {}
     return result;
   }
 }

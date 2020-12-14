@@ -1,10 +1,9 @@
 // @ts-ignore
-import {LocalStorage} from '../../helpers/storageWrapper/local-storage';
-import {MemoryStorage} from '../../helpers/storageWrapper/memory-storage';
-import {storageAvailable} from './storage-available';
+import { LocalStorage } from '../../helpers/storageWrapper/local-storage';
+import { MemoryStorage } from '../../helpers/storageWrapper/memory-storage';
+import { storageAvailable } from './storage-available';
 
 export class LocalStorageService implements LocalStorage {
-
   private readonly storage: Storage;
 
   constructor() {
