@@ -1,6 +1,6 @@
-// @ts-ignore
-import { SvelteComponent } from 'svelte/internal';
+import type { SvelteComponent } from 'svelte/internal';
 import { writable } from 'svelte/store';
+
 import { saveAfterUpdate } from '../helpers/modals.helper';
 
 export interface IModal {

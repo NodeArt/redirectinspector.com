@@ -1,5 +1,4 @@
 import { writable } from 'svelte/store';
-import { IUserAgent, userAgents } from './user-agents';
 
 export const cookies = writable({});
 
