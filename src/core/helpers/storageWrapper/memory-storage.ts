@@ -1,7 +1,6 @@
-// @ts-ignore
-import {AbstractStorage} from './abstract-storage';
+import type {AbstractStorage} from './abstract-storage';
 
-export interface IDictionary<T = any> {
+export interface IDictionary<T = unknown> {
   [id: string]: T;
 }
 

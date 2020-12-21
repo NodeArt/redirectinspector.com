@@ -1,42 +1,32 @@
 <script lang="ts">
-	import {modals} from "./core/store";
+  /* eslint-disable import/first */
+  import CookieModal from './components/CookieModal.svelte';
+  import CustomUserAgent from './components/CustomUserAgent.svelte';
+  import Modals from './components/Modals.svelte';
+  import NotFound from './components/NotFound.svelte';
+  import Prepare from './components/Prepare.svelte';
+  import Routing from './components/Routing.svelte';
+  import { initModals } from './core/services/init-prepare';
+  import { modals } from './core/store';
 
-	import CustomUserAgent from "./components/CustomUserAgent.svelte"
-	import CookieModal from "./components/CookieModal.svelte"
-	import {Router, Route} from "svelte-routing";
-	import Result from "./components/Result.svelte";
-	import Prepare from "./components/Prepare.svelte";
+  export const modalWindows = {
+    customUserAgent: { isActive: false, component: CustomUserAgent },
+    cookie: { isActive: false, component: CookieModal }
+  };
 
-	import NotFound from "./components/NotFound.svelte";
-	import {initApplication, initModals} from "./core/services/init-prepare";
-	import Modals from "./components/Modals.svelte";
-
-	export const modalWindows = {
-		'customUserAgent': {isActive: false, component: CustomUserAgent},
-		'cookie': {isActive: false, component: CookieModal}
-	};
-
-	let url = "";
-	initApplication();
-	initModals(modalWindows);
-
-	const modalList = [
-		'customUserAgent',
-		'cookie'
-	];
-
+  initModals(modalWindows);
+  const modalList = [
+    'customUserAgent',
+    'cookie'
+  ];
 </script>
 
-<svelte:head>
-	<link rel="stylesheet" href="carbon-components-svelte/css/g10.css">
-</svelte:head>
-<Router url="{url}" >
-	<div>
-		<Route path="/"><Prepare/></Route>
-		<Route path="/result"><Result /></Route>
-		<Route path="**"><NotFound/></Route>
-	</div>
-</Router>
+<Routing>
+    <div slot="/"><Prepare /></div>
+    <div slot="/result"><Prepare isResult="{true}"/></div>
+    <div slot="**"><NotFound/></div>
+</Routing>
+
 {#each modalList as modal}
 	<Modals modals="{$modals}" toActivate="{modal}"/>
 {/each}

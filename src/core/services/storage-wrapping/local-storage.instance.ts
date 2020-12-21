@@ -1,8 +1,8 @@
-import {LocalStorageService} from './local-storage.service';
+import { LocalStorageService } from './local-storage.service';
 
 let storage = null;
 
-export function localStorage() {
-  return storage === null ? storage = new LocalStorageService() : storage;
-
+export function localStorage (): LocalStorageService {
+  storage = storage === null ? new LocalStorageService() : storage;
+  return storage;
 }

@@ -67,6 +67,8 @@ button:focus {
 }
 :root {
     --black-color: #161616;
+    --light-black-color: #232323;
+    --white-color: #000000;
 }
 
 .grid {

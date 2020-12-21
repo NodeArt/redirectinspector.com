@@ -6,8 +6,8 @@ export class SafeJSON {
    * @param data
    * @param returnDefault
    */
-  static parse(data: string, returnDefault = {}) {
-    return SafeJSON.safe(returnDefault, () => {
+  static parse<T> (data: string, returnDefault: T): T {
+    return SafeJSON.safe<T>(returnDefault, () => {
       return JSON.parse(data);
     });
   }
@@ -16,8 +16,8 @@ export class SafeJSON {
    * @param data
    * @param returnDefault
    */
-  static stringify(data: object, returnDefault = '') {
-    return SafeJSON.safe(returnDefault, () => {
+  static stringify (data: unknown, returnDefault = ''): string {
+    return SafeJSON.safe<string>(returnDefault, () => {
       return JSON.stringify(data);
     });
   }
@@ -28,7 +28,7 @@ export class SafeJSON {
    * @param input
    * @param callback
    */
-  static safe(input, callback) {
+  static safe<T> (input: T, callback: () => T): T {
     let result = input;
     try {
       result = callback();

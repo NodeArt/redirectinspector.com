@@ -1,14 +1,14 @@
 <script type="ts">
-    import {Cookie} from "../core/services/handle-cookie.service";
-    import {Modals} from "../core/services/handle-modals-list.service";
+    import { Cookie } from '../core/services/handle-cookie.service';
+    import { Modals } from '../core/services/handle-modals-list.service';
 
     export let history = [];
     const openModal = (cookie) => {
       return () => {
         Cookie.update(cookie);
         Modals.open('cookie');
-      }
-    }
+      };
+    };
 </script>
 <div class="history-wrapper">
     {#each history as _history, i}
@@ -34,13 +34,14 @@
 
 <style type="text/scss">
     .history-wrapper {
-        min-width: 1024px;
         white-space: nowrap;
         overflow: hidden;
-        resize: horizontal;
+        text-align: left;
+        padding: 11px;
     }
     .history-title {
          text-overflow: ellipsis;
+        overflow: hidden;
     }
 
     .arrow {
@@ -93,12 +94,12 @@
     }
 
     .data-flow {
-        display: flex;
+      display: flex;
+    }
 
-        &-cookie {
-            display: flex;
-            justify-content: center;
-            width: 500px;
-        }
+    .data-flow-cookie {
+      display: flex;
+      justify-content: center;
+      width: 500px;
     }
 </style>

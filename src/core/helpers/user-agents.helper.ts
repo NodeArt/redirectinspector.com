@@ -1,27 +1,20 @@
-import {userAgentsList} from '../config';
-// @ts-ignore
-import {IUserAgent} from '../store';
-import {getCustomUserAgents, removeCustomUserAgent, saveCustomUserAgents} from './custom-user-agents.helper';
+import { userAgentsList } from '../config';
+import type { IUserAgent } from '../store';
+import { getCustomUserAgents, removeCustomUserAgent, saveCustomUserAgents } from './custom-user-agents.helper';
 
-export const getUserAgents = () => userAgentsList.concatFromLocalStorage();
+export const getUserAgents = (): IUserAgent[] => concatFromLocalStorage();
 
-export const AddingUserAgentWrapper = (userAgent: IUserAgent) => {
+export const AddingUserAgentWrapper = (userAgent: IUserAgent): IUserAgent => {
   saveCustomUserAgents(userAgent);
   return userAgent;
 };
 
-export const RemovingUserAgentWrapper = (index: number) => {
+export const RemovingUserAgentWrapper = (index: number): IUserAgent[] => {
   removeCustomUserAgent(index);
   return getUserAgents();
 };
 
-declare global {
-  interface Array<T> {
-    concatFromLocalStorage(): Array<T>;
-  }
-}
-
-Array.prototype.concatFromLocalStorage = function () {
+const concatFromLocalStorage = function (): IUserAgent[] {
   const customUserAgents = getCustomUserAgents();
-  return [...this, {ua: 'Custom', name: 'Custom'}, ...customUserAgents];
-}
+  return [...userAgentsList, { ua: 'Custom', name: 'Custom' }, ...customUserAgents];
+};

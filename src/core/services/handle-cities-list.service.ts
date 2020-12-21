@@ -1,20 +1,27 @@
+import { testProxies } from '../config';
+import { loadCities } from '../store';
+import { getCities, http } from './api-requests.service';
 
-import {testProxies} from '../config';
-import {loadCities} from '../store';
-import {getCities, http} from './api-requests.service';
-
-
-interface IProxyData {
-  isAvailable: boolean;
-  host: string;
-  country: string;
-  city: string;
+export interface IProxyData {
+  isAvailable?: boolean;
+  host?: string;
+  country?: string;
+  city?: string;
 }
 
 export const Cities = {
-  init: () => http(getCities, (proxies: IProxyData[]) => {
-    loadCities(proxies.filter(proxy => !proxy.isAvailable)
-      .map(proxy => ({id: proxy.host, text: `${proxy.country}, ${proxy.city}`}))
-      .concat(testProxies))
-  }),
+  init: async (): Promise<void> => {
+    await http<IProxyData[]>({
+      func: getCities,
+      callback: (proxies: IProxyData[]) => {
+        loadCities(proxies.filter(proxy => proxy.isAvailable)
+          .concat(testProxies));
+      }
+    });
+  },
+  getIsSelectedCity: (selected: IProxyData, proxyData: IProxyData): boolean => {
+    return selected.host === proxyData.host &&
+           selected.country === proxyData.country &&
+           selected.city === proxyData.city;
+  }
 };

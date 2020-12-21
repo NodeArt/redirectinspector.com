@@ -1,5 +1,7 @@
 /node_modules/
 /public/
 .idea/
+src/**/*.js
+src/**/*.js.map
 
 .DS_Store

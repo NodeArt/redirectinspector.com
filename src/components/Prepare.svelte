@@ -1,25 +1,28 @@
 <script lang="ts">
-    import {
-        Tabs, Tab, TabContent
-    } from "carbon-components-svelte";
-    import queryString from "query-string";
-    import TabMock from "./TabMock.svelte";
-    import Single from "./Single.svelte";
-    import Header from "./Header.svelte";
-
-    const {city, urlAddress, userAgent, tab} = queryString.parse(window.location.search);
-    let url = "";
-
-    let selectedTab = tab || 0;
-
-    const tabs = [
-        {text: 'One', component: Single, index: 0},
-        {text: 'multi', component: TabMock, index: 1},
-    ];
+  /* eslint-disable import/order */
+  import { Tabs, Tab, TabContent } from 'carbon-components-svelte';
+  import { initApplication } from '../core/services/init-prepare';
+  import { getParsedParams } from '../core/helpers/get-params-parse.helper';
+  import Header from './Header.svelte';
+  import TabMock from './TabMock.svelte';
+  import Single from './Single.svelte';
 
 
+  const { city, urlAddress, userAgent, tab } = getParsedParams();
+  export let isResult = false;
+
+  if (!isResult) {
+    initApplication();
+  }
+
+  let selectedTab = Number(tab) || 0;
+  const tabs = [
+    { text: 'One', component: Single, index: 0 },
+    { text: 'multi', component: TabMock, index: 1 },
+  ];
 </script>
-<Header company="RedirectInspector" pageName="HomePage"/>
+
+<Header company="RedirectInspector"/>
 <main class="bx--content">
     <div class="grid">
         <div>
@@ -33,7 +36,16 @@
                 {/each}
                 <div slot="content" class="dx--tabs-content">
                     {#each tabs as tab }
-                        <TabContent><svelte:component this={tab.component} selectedTab="{selectedTab}" props={queryString.parse(window.location.search)} /></TabContent>
+                        <TabContent>
+                            <svelte:component
+                                    this={tab.component}
+                                    selectedTab="{selectedTab}"
+                                    device={userAgent}
+                                    city={city}
+                                    address={urlAddress}
+                                    isResult="{isResult}"
+                                    />
+                        </TabContent>
                     {/each}
                 </div>
             </Tabs>
@@ -47,13 +59,6 @@
         padding: 1em;
         max-width: 240px;
         margin: 0 auto;
-    }
-
-    h1 {
-        color: #ff3e00;
-        text-transform: uppercase;
-        font-size: 4em;
-        font-weight: 100;
     }
 
     .dx--tabs-content {

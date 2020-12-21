@@ -1,8 +1,8 @@
-import {transformActivateField} from '../helpers/modals.helper';
-import {loadModalList, updateModalStatus} from '../store';
+import { transformActivateField } from '../helpers/modals.helper';
+import { IModal, loadModalList, updateModalStatus } from '../store';
 
 export const Modals = {
-  init: (modalWindows) => loadModalList(modalWindows),
-  open: (modal: string) => updateModalStatus(transformActivateField(modal, true)),
-  close: (modal: string) => updateModalStatus(transformActivateField(modal, false)),
+  init: (modalWindows: IModal): void => loadModalList(modalWindows),
+  open: (modal: string): void => updateModalStatus(transformActivateField(modal, true)),
+  close: (modal: string): void => updateModalStatus(transformActivateField(modal, false)),
 };

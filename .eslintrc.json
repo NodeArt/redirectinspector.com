@@ -1,0 +1,60 @@
+{
+    "env": {
+        "browser": true,
+        "es2021": true
+    },
+    "extends": [
+        "standard",
+        "plugin:@typescript-eslint/recommended",
+        "plugin:import/errors",
+        "plugin:import/warnings",
+        "plugin:import/typescript"
+    ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion":  12,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "plugins": [
+        "@typescript-eslint",
+        "typescript",
+        "svelte3",
+        "import"
+    ],
+    "rules": {
+        "semi": ["error", "always"],
+        "quotes": ["error", "single", { "avoidEscape": true, "allowTemplateLiterals": true }],
+        "comma-dangle": ["error", {
+            "arrays": "ignore",
+            "objects": "ignore",
+            "imports": "ignore",
+            "exports": "ignore",
+            "functions": "ignore"
+        }],
+        "import/order": ["error", {"alphabetize": {"order": "asc", "caseInsensitive": true}}],
+        "spaced-comment": ["error", "always", { "markers": ["#"] }]
+    },
+    "overrides": [
+        {
+            "files": ["*.ts"],
+            "rules": {
+                "@typescript-eslint/explicit-module-boundary-types": [
+                    "error",
+                    { "allowHigherOrderFunctions": true, "allowTypedFunctionExpressions": true }
+                ]
+            }
+        },
+        {
+            "files": ["*.svelte"],
+            "processor": "svelte3/svelte3",
+            "rules": {
+                "no-multiple-empty-lines": ["error", { "max": 2, "maxBOF": 2}],
+                "import/first": ["error",  "absolute-first"],
+                "indent": ["error", 2, { "outerIIFEBody": 4 }]
+            }
+        }
+    ]
+}

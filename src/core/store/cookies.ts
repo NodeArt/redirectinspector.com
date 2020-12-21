@@ -1,10 +1,9 @@
-import {writable} from 'svelte/store';
-import {IUserAgent, userAgents} from './user-agents';
+import { writable } from 'svelte/store';
 
-export const cookies = writable({})
+export const cookies = writable({});
 
 export interface ICookie {
   [key: string]: string;
 }
 
-export const updateCookies = (cookie: ICookie) => cookies.update(() => cookie);
+export const updateCookies = (cookie: ICookie): void => cookies.update(() => cookie);

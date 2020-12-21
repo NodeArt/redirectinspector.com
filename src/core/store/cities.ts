@@ -1,10 +1,11 @@
-import {writable} from 'svelte/store';
+import { writable } from 'svelte/store';
+import { emptyProxy } from '../mocks';
+import type { IProxyData } from '../services/handle-cities-list.service';
 
-export interface ICity {
-  id: string;
-  text: string;
-}
+export const cities = writable([emptyProxy]);
 
-export const cities = writable([] as ICity[]);
+export const loadCities = (_cities: IProxyData[]): void => cities.update(() => _cities);
 
-export const loadCities = (_cities) => cities.update(() => _cities);
+export const selectedProxy = writable(emptyProxy);
+
+export const changeSelectedProxy = (proxy: IProxyData): void => selectedProxy.update(() => proxy);

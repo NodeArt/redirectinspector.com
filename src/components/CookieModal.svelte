@@ -1,15 +1,14 @@
-<script>
-    import {cookies} from '../core/store';
+<script type="ts">
+    /* eslint-disable import/first */
+    import { cookies } from '../core/store';
 
-    let cookie = null;
-    cookies.subscribe(data => cookie = data);
 </script>
 
 <div class="wrapper">
     {#each Object.keys($cookies) as cookieKey}
         <div>
             <span>key: {cookieKey}</span>
-            <p>value: {cookie[cookieKey]}</p>
+            <p>value: {$cookies[cookieKey]}</p>
         </div>
     {/each}
 </div>
