@@ -1,10 +1,9 @@
 <script lang="ts">
 	import '../app.scss';
 	import Header from '$lib/header/Header.svelte';
-	import '../app.postcss';
 </script>
 
-<header />
+<Header />
 
 <main>
 	<slot />
@@ -14,7 +13,7 @@
 	<p>visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to learn SvelteKit</p>
 </footer>
 
-<style>
+<style lang="scss">
 	main {
 		flex: 1;
 		display: flex;
