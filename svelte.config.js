@@ -1,5 +1,4 @@
-// import adapter from '@sveltejs/adapter-cloudflare';
-import adapter from '@sveltejs/adapter-static';
+import adapter from '@sveltejs/adapter-cloudflare';
 import preprocess from 'svelte-preprocess';
 import autoprefixer from 'autoprefixer';
 
@@ -20,14 +19,8 @@ const config = {
 	],
 
 	kit: {
-		adapter: adapter({
-			fallback: '404.html'
-		})
+		adapter: adapter()
 	},
-
-	prerender: false,
-
-	ssr: false
 };
 
 export default config;
